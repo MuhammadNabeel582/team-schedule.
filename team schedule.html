@@ -22,17 +22,17 @@
     </table>
 
     <script>
-        // Replace 'https://docs.google.com/spreadsheets/d/11msB1PhTL8_X2Tjl5wJoTAJ3ox1tLN10wfycIEdZA48/edit#gid=122695871' with the URL of your Google Sheet
+        // Use the provided Google Sheets URL
         const googleSheetUrl = 'https://docs.google.com/spreadsheets/d/11msB1PhTL8_X2Tjl5wJoTAJ3ox1tLN10wfycIEdZA48/edit#gid=122695871';
 
         // Function to fetch data from the Google Sheet
         async function fetchData() {
             try {
                 const response = await fetch(googleSheetUrl);
-                const data = await response.json();
+                const data = await response.text();
 
                 // Process and display the data
-                const scheduleData = data.values; // Assuming the data is in a table format
+                const scheduleData = data.split('\n').map(row => row.split(','));
                 const scheduleTable = document.getElementById('schedule-data');
 
                 scheduleData.forEach(row => {
